@@ -29,7 +29,8 @@
 <br>
 <h2>Usage Examples</h2>
 
-<h3 id="ready">async ready()</h3>
+<a name="ready"></a>
+<h3>async ready()</h3>
 Defer script execution until the DOM is ready. Implements the Promise interface.
 
 <pre>import { ready } from '@aamasri/dom-utils';
@@ -39,8 +40,8 @@ ready().then(function() {
 });</pre>
 
 
-
-<h3 id="loaded">async loaded()</h3>
+<a name="loaded"></a>
+<h3>async loaded()</h3>
 Allows script execution to be deferred until after the initial page render. Implements the Promise interface.
 
 <pre>import { loaded } from '@aamasri/dom-utils';
@@ -52,8 +53,8 @@ loaded().then(function() {
 });</pre>
 
 
-
-<h3 id="cache">$cache()</h3>
+<a name="cache"></a>
+<h3>$cache()</h3>
 Re-use the core jQuery objects (may save some overhead). Provides the $(window), $(document), and $('body') jQuery objects.
 
 <pre>import { $cache } from '@aamasri/dom-utils';
@@ -62,7 +63,8 @@ let windowWidth = $cache().$window.width();</pre>
 
 
 
-<h3 id="cache">isInIframe()</h3>
+<a name="isInIframe"></a>
+<h3>isInIframe()</h3>
 Enables check in case our code is running inside an iframe. This can avoid the problem where a functions fails because it is unavailable inside the iframe. 
 
 <pre>import { isInIframe } from '@aamasri/dom-utils';
@@ -75,7 +77,8 @@ if (isInIframe) {
 
 
 
-<h3 id="getViewportOffset">getViewportOffset(element)</h3>
+<a name="getViewportOffset"></a>
+<h3>getViewportOffset(element)</h3>
 <p>Returns the top, right, bottom, left offsets of the element (relative to the viewport).</p> 
 <p>For example a negative offset means that the element is scrolled out of view.</p>
 <p>This function is also useful when you need to position another element relative the target.</p>   
@@ -90,7 +93,8 @@ if (targetOffsets.top < 0 || targetOffsets.bottom < 0) {
 }</pre>
 
 
-<h3 id="onTopZIndex">onTopZIndex()</h3>
+<a name="onTopZIndex"></a>
+<h3>onTopZIndex()</h3>
 <p>Returns the highest z-index value on the page.</p> 
 <p>This is useful for popup dialog boxes (or notifications) that need to display on-top of everything else already on the page.</p>   
 
@@ -100,7 +104,8 @@ $dialog.css({ 'position', 'absolute', 'z-index', onTopZIndex() + 1 });  // posit
 
 
 
-<h3 id="getZIndex">getZIndex(element, recursive)</h3>
+<a name="getZIndex"></a>
+<h3>getZIndex(element, recursive)</h3>
 <p>Gets the z-index style applied to an element.</p>
 <p>More usefully (because parent z-index affects descendants), set the recursive option true for the <strong>effective</strong> z-index of the element tree.</p>   
 
@@ -110,7 +115,8 @@ const dialogLayer = getZIndex(dialog, true);</pre>
 
 
 
-<h3 id="getAppliedStyle">getAppliedStyle(element, style)</h3>
+<a name="getAppliedStyle"></a>
+<h3>getAppliedStyle(element, style)</h3>
 <p>Slightly easier to use than the native window.getComputedStyle() function.</p>
 
 <pre>import { getAppliedStyle } from '@aamasri/dom-utils';
@@ -119,7 +125,8 @@ const buttonVisible = getAppliedStyle(button, 'display') !== 'none';</pre>
 
 
 
-<h3 id="screenResolution">screenResolution()</h3>
+<a name="screenResolution"></a>
+<h3>screenResolution()</h3>
 <p>Part of a system to determine the optimal image resolution for a given device.</p>
 <p>Returns 'lo', 'med' or 'hi' based on the size of the browser viewport.</p>
 
@@ -183,7 +190,7 @@ Some of the utility functions depend on the jQuery package.
 <li>Re-build the browser output bundle...<pre>npm run build-production</pre>
 ...and observe that webpack completed with no errors.</li>
 <li>Test the bundle by loading page: "dist/index.html" in a browser.</li>
-<li>Commit <pre>git commit -m "Release version x.x.x - description"</pre></li>
+<li>Commit <pre>git commit -a -m "Release version x.x.x - description"</pre></li>
 <li>Tag the commit with it's version number: "x.x.x".</li>
 <li>Change the "latest" tag pointer to the latest commit & push:
     <pre>git tag -f latest

@@ -1,7 +1,7 @@
 /**
  * @fileOverview A collection of DOM utils to add syntactic sugar and supplement jQuery.
  * @author Ananda Masri
- * @version 1.0.1
+ * @version 1.0.2
  */
 
 
