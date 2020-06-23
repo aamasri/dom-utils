@@ -1,0 +1,26 @@
+{
+  "name": "dom-utils",
+  "version": "1.0.0",
+  "dependencies": {
+    "jquery": ">=1.7.0 <4.0.0"
+  },
+  "description": "A collection of DOM utils to add syntactic sugar and supplement jQuery.",
+  "main": "dom-utils.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aamasri/dom-utils.git"
+  },
+  "keywords": [
+    "javascript",
+    "utility"
+  ],
+  "author": "Ananda Masri <ananda@auroraweb.ca> (https://auroraweb.ca)",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "bugs": {
+    "url": "https://github.com/aamasri/dom-utils/issues"
+  },
+  "homepage": "https://github.com/aamasri/dom-utils#readme"
+}
