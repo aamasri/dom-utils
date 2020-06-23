@@ -2,7 +2,7 @@
 
 <p>A collection of DOM utils to add syntactic sugar and supplement jQuery.</p>
 
-<p>This is <strong>not</strong> an (ES5) browser package.  It's an ES6 module designed to be 'imported' into a javascript project that's transpiled using babel & webpack.</p>
+<p>This is <strong>not</strong> an (ES5) browser package.  It's an ES6 source module designed to be 'imported' into a javascript project that's transpiled using babel & webpack.</p>
 
 
 
@@ -14,14 +14,14 @@
     <li><a href="#loaded"><code>loaded().then(...)</code></a> - deferred window loaded.</li>
     <li><a href="#cache"><code>$cache()</code></a> - providing $(window), $(document), and $('body').</li>
     <li><a href="#isInIframe"><code>isInIframe()</code></a> - is our code running inside an iframe?</li>
-    <li><a href="#isTouchDevice"><code>isTouchDevice()</code></a></li>
-    <li><a href="#isMobile"><code>isMobile()</code></a></li>
-    <li><a href="#isVisible"><code>isVisible(element)</code></a></li>
+    <li><code>isTouchDevice()</code></li>
+    <li><code>isMobile()</code></li>
+    <li><code>isVisible(element)</code> - whether element is visible in the viewport or scrolled out of view.</li>
     <li><a href="#getViewportOffset"><code>getViewportOffset(element)</code></a> - top, right, bottom, left offsets from viewport.</li>
     <li><a href="#onTopZIndex"><code>onTopZIndex()</code></a> - for new elements to be displayed on top.</li>
     <li><a href="#getZIndex"><code>getZIndex(element)</code></a> - provides layer information.</li>
     <li><a href="#getAppliedStyle"><code>getAppliedStyle(element, style)</code></a> - computed style.</li></li>
-    <li><a href="#webpSupport"><code>webpSupport()</code></a> - whether the browser supports webP images.</li></li>
+    <li><code>webpSupport()</code> - whether the browser supports webP images.</li></li>
     <li><a href="#screenResolution"><code>screenResolution()</code></a> - returns 'lo', 'med' or 'hi' (to support a responsive image system).</li>    
 </ul>
 
@@ -31,114 +31,103 @@
 
 <h3 id="ready">async ready()</h3>
 Defer script execution until the DOM is ready. Implements the Promise interface.
-<pre>
-import { ready } from '@aamasri/dom-utils';
+
+<pre>import { ready } from '@aamasri/dom-utils';
 
 ready().then(function() { 
-    alert('Your browser is ready to run scripts...')
-});
-</pre>
+    alert('Your browser is ready to run scripts...');
+});</pre>
 
 
-<br>
+
 <h3 id="loaded">async loaded()</h3>
 Allows script execution to be deferred until after the initial page render. Implements the Promise interface.
-<pre>
-import { loaded } from '@aamasri/dom-utils';
 
-loaded().then(function() { 
+<pre>import { loaded } from '@aamasri/dom-utils';
+
+loaded().then(function() {
     domUtils.loaded().then(function() { 
-        alert('Your browser has finished loading (including images)...')
+        alert('Your browser has finished loading (including images)...');
     });
-});
-</pre>
+});</pre>
 
 
-<br>
+
 <h3 id="cache">$cache()</h3>
 Re-use the core jQuery objects (may save some overhead). Provides the $(window), $(document), and $('body') jQuery objects.
-<pre>
-import { $cache } from '@aamasri/dom-utils';
 
-let windowWidth = $cache().$window.width();
-</pre>
+<pre>import { $cache } from '@aamasri/dom-utils';
+
+let windowWidth = $cache().$window.width();</pre>
 
 
-<br>
+
 <h3 id="cache">isInIframe()</h3>
 Enables check in case our code is running inside an iframe. This can avoid the problem where a functions fails because it is unavailable inside the iframe. 
-<pre>
-import { isInIframe } from '@aamasri/dom-utils';
 
-if (isInIframe)
+<pre>import { isInIframe } from '@aamasri/dom-utils';
+
+if (isInIframe) {
     parent.showMessage('I'm executing a parent window function');
-else
+} else {
     alert('This is in the iframe');
-</pre>
+}</pre>
 
 
-<br>
+
 <h3 id="getViewportOffset">getViewportOffset(element)</h3>
 <p>Returns the top, right, bottom, left offsets of the element (relative to the viewport).</p> 
 <p>For example a negative offset means that the element is scrolled out of view.</p>
 <p>This function is also useful when you need to position another element relative the target.</p>   
-<pre>
-import { getViewportOffset } from '@aamasri/dom-utils';
+
+<pre>import { getViewportOffset } from '@aamasri/dom-utils';
 
 const target = window.getElementById('submitButton');
 const targetOffsets = getViewportOffset(target);    // target can be a DOM element or jQuery object
 
-if (targetOffsets.top < 0 || targetOffsets.bottom < 0)
+if (targetOffsets.top < 0 || targetOffsets.bottom < 0) {
     target.scrollIntoView();
+}</pre>
 
-</pre>
 
-
-<br>
 <h3 id="onTopZIndex">onTopZIndex()</h3>
 <p>Returns the highest z-index value on the page.</p> 
 <p>This is useful for popup dialog boxes (or notifications) that need to display on-top of everything else already on the page.</p>   
-<pre>
-import { onTopZIndex } from '@aamasri/dom-utils';
 
-$dialog.css({ 'position', 'absolute', 'z-index', onTopZIndex() + 1 });  // position dialog box on top
-</pre>
+<pre>import { onTopZIndex } from '@aamasri/dom-utils';
 
+$dialog.css({ 'position', 'absolute', 'z-index', onTopZIndex() + 1 });  // position dialog box on top</pre>
 
 
-<br>
+
 <h3 id="getZIndex">getZIndex(element, recursive)</h3>
 <p>Gets the z-index style applied to an element.</p>
 <p>More usefully (because parent z-index affects descendants), set the recursive option true for the <strong>effective</strong> z-index of the element tree.</p>   
-<pre>
-import { getZIndex } from '@aamasri/dom-utils';
-const dialogLayer = getZIndex(dialog, true);
-</pre>
+
+<pre>import { getZIndex } from '@aamasri/dom-utils';
+
+const dialogLayer = getZIndex(dialog, true);</pre>
 
 
 
-<br>
 <h3 id="getAppliedStyle">getAppliedStyle(element, style)</h3>
 <p>Slightly easier to use than the native window.getComputedStyle() function.</p>
-<pre>
-import { getAppliedStyle } from '@aamasri/dom-utils';
-const buttonVisible = getAppliedStyle(button, 'display') !== 'none';
-</pre>
+
+<pre>import { getAppliedStyle } from '@aamasri/dom-utils';
+
+const buttonVisible = getAppliedStyle(button, 'display') !== 'none';</pre>
 
 
 
-<br>
 <h3 id="screenResolution">screenResolution()</h3>
 <p>Part of a system to determine the optimal image resolution for a given device.</p>
 <p>Returns 'lo', 'med' or 'hi' based on the size of the browser viewport.</p>
-<pre>
-import { screenResolution } from '@aamasri/dom-utils';
+
+<pre>import { screenResolution } from '@aamasri/dom-utils';
 
 const resolution = screenResolution();
 
-wallpaper.src = \`/img/wallpaper-${resolution}.jpg\`;
-</pre>
-
+wallpaper.src = \`/img/wallpaper-${resolution}.jpg\`;</pre>
 
 
 
@@ -149,10 +138,8 @@ wallpaper.src = \`/img/wallpaper-${resolution}.jpg\`;
 <h2>Installation</h2>
 Dom-utils is an ES6 source module intended to be imported into your ES6 projects - prior to transpiling into a browser bundle with Babel/Webpack.
 
-<pre>
-$ cd to/your/project
-$ npm install @aamasri/dom-utils
-</pre>
+<pre>$ cd to/your/project
+$ npm install @aamasri/dom-utils --save-dev</pre>
 
 Then import and use it in your project's ES6 modules:
 <h4>Static import</h4>
@@ -181,10 +168,6 @@ import(/* webpackChunkName: "dom-utils" */ '@aamasri/dom-utils').then((domUtils)
 <h2>Package Management</h2>
 
 Dom-utils supports [npm](https://www.npmjs.com/package/dom-utils) under the name `@aamasri/dom-utils`.
-
-<h3>NPM</h3>
-<pre>$ npm install @aamasri/dom-utils --save</pre>
-
 
 <br>
 <h3>Dependencies</h3>
