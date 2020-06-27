@@ -1,7 +1,7 @@
 /**
  * @fileOverview A collection of DOM utils to add syntactic sugar and supplement jQuery.
  * @author Ananda Masri
- * @version 1.0.2
+ * @version 1.0.3
  */
 
 
@@ -267,4 +267,26 @@ export function screenResolution() {
 		return 'med';
 
 	return 'lo';
+}
+
+
+/**
+ * A simple, fast (faster than md5 etc) hash code generator.
+ *
+ * @param {string} content  - string to hash
+ * @returns {string}		- the unique hash code
+ */
+export function hash(content) {
+	let hash = '';
+
+	if (content.length === 0)
+		return hash;
+
+	for (let i = 0; i < this.length; i++) {
+		let char = content.charCodeAt(i);
+		hash = ((hash << 5) - hash) + char;
+		hash = hash & hash; // Convert to 32bit integer
+	}
+
+	return hash;
 }

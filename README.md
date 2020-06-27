@@ -22,7 +22,8 @@
     <li><a href="#getZIndex"><code>getZIndex(element)</code></a> - provides layer information.</li>
     <li><a href="#getAppliedStyle"><code>getAppliedStyle(element, style)</code></a> - computed style.</li></li>
     <li><code>webpSupport()</code> - whether the browser supports webP images.</li></li>
-    <li><a href="#screenResolution"><code>screenResolution()</code></a> - returns 'lo', 'med' or 'hi' (to support a responsive image system).</li>    
+    <li><a href="#screenResolution"><code>screenResolution()</code></a> - returns 'lo', 'med' or 'hi' (to support a responsive image system).</li>
+    <li><a href="#hash"><code>hash(content)</code></a> - fast hash code generator.</li>    
 </ul>
 
 
@@ -80,8 +81,8 @@ if (isInIframe) {
 <a name="getViewportOffset"></a>
 <h3>getViewportOffset(element)</h3>
 <p>Returns the top, right, bottom, left offsets of the element (relative to the viewport).</p> 
-<p>For example a negative offset means that the element is scrolled out of view.</p>
-<p>This function is also useful when you need to position another element relative the target.</p>   
+<p>For example, a negative offset means that the element is scrolled out of view.</p>
+<p>This function is also useful in positioning another element relative to the specified element.</p>   
 
 <pre>import { getViewportOffset } from '@aamasri/dom-utils';
 
@@ -107,7 +108,7 @@ $dialog.css({ 'position', 'absolute', 'z-index', onTopZIndex() + 1 });  // posit
 <a name="getZIndex"></a>
 <h3>getZIndex(element, recursive)</h3>
 <p>Gets the z-index style applied to an element.</p>
-<p>More usefully (because parent z-index affects descendants), set the recursive option true for the <strong>effective</strong> z-index of the element tree.</p>   
+<p>More usefully (because parent z-index affects descendants), set the recursive option true for the <strong>effective</strong> z-index (ie. the element's ancestry).</p>   
 
 <pre>import { getZIndex } from '@aamasri/dom-utils';
 
@@ -136,6 +137,31 @@ const resolution = screenResolution();
 
 wallpaper.src = \`/img/wallpaper-${resolution}.jpg\`;</pre>
 
+
+
+
+
+<a name="hash"></a>
+<h3>hash(content)</h3>
+<p>A simple, fast (faster than md5 etc) hash code generator.</p>
+
+<pre>import { hash } from '@aamasri/dom-utils';
+
+const initialContent = $input.val();
+const initialContentSignature = hash(initialContent);
+
+$input.on('change', function() {
+    const newContent = $input.val();
+    const newContentSignature = hash(newContent);
+
+    if (newContentSignature !== initialContentSignature)
+        alert('the input value changed');
+});
+
+
+
+
+wallpaper.src = \`/img/wallpaper-${resolution}.jpg\`;</pre>
 
 
 
@@ -187,11 +213,8 @@ Some of the utility functions depend on the jQuery package.
 <ol>
 <li>Increment the "version" attribute of `package.json`.</li>
 <li>Increment the version number in the `dom-utils.js` file.</li>
-<li>Re-build the browser output bundle...<pre>npm run build-production</pre>
-...and observe that webpack completed with no errors.</li>
-<li>Test the bundle by loading page: "dist/index.html" in a browser.</li>
 <li>Commit <pre>git commit -a -m "Release version x.x.x - description"</pre></li>
-<li>Tag the commit with it's version number: "x.x.x".</li>
+<li>Tag the commit with it's version number <pre>git tag x.x.x</pre></li>
 <li>Change the "latest" tag pointer to the latest commit & push:
     <pre>git tag -f latest
 git push origin master :refs/tags/latest
