@@ -10,27 +10,27 @@
 
 <h2>Utility Function List</h2>
 <ul>
-    <li><a href="#ready"><code>ready().then(...)</code></a> - deferred document ready.</li>
-    <li><a href="#loaded"><code>loaded().then(...)</code></a> - deferred window loaded.</li>
+    <li><a href="#async-ready"><code>ready().then(...)</code></a> - deferred document ready.</li>
+    <li><a href="#async-loaded"><code>loaded().then(...)</code></a> - deferred window loaded.</li>
     <li><a href="#cache"><code>$cache()</code></a> - providing $(window), $(document), and $('body').</li>
-    <li><a href="#isInIframe"><code>isInIframe()</code></a> - is our code running inside an iframe?</li>
+    <li><a href="#isiniframe"><code>isInIframe()</code></a> - is our code running inside an iframe?</li>
     <li><code>isTouchDevice()</code></li>
     <li><code>isMobile()</code></li>
     <li><code>isVisible(element)</code> - whether element is visible in the viewport or scrolled out of view.</li>
-    <li><a href="#getViewportOffset"><code>getViewportOffset(element)</code></a> - top, right, bottom, left offsets from viewport.</li>
-    <li><a href="#onTopZIndex"><code>onTopZIndex()</code></a> - for new elements to be displayed on top.</li>
-    <li><a href="#getZIndex"><code>getZIndex(element)</code></a> - provides layer information.</li>
-    <li><a href="#getAppliedStyle"><code>getAppliedStyle(element, style)</code></a> - computed style.</li></li>
-    <li><a href="#webpsupport"><code>webpSupport()</code></a> - whether the browser supports webP images.</li></li>
-    <li><a href="#screenResolution"><code>screenResolution()</code></a> - returns 'lo', 'med' or 'hi' (to support a responsive image system).</li>
-    <li><a href="#hash"><code>hash(content)</code></a> - fast hash code generator.</li>    
+    <li><a href="#getviewportoffsetelement"><code>getViewportOffset(element)</code></a> - top, right, bottom, left offsets from viewport.</li>
+    <li><a href="#ontopzindex"><code>onTopZIndex()</code></a> - for new elements to be displayed on top.</li>
+    <li><a href="#getzindexelement-recursive"><code>getZIndex(element)</code></a> - provides layer information.</li>
+    <li><a href="#getappliedstyleelement-style"><code>getAppliedStyle(element, style)</code></a> - computed style.</li></li>
+    <li><a href="#webpsupportfeature"><code>webpSupport()</code></a> - whether the browser supports webP images.</li></li>
+    <li><a href="#screenresolution"><code>screenResolution()</code></a> - returns 'lo', 'med' or 'hi' (to support a responsive image system).</li>
+    <li><a href="#hashcontent"><code>hash(content)</code></a> - fast hash code generator.</li>    
 </ul>
 
 
 <br>
 <h2>Usage Examples</h2>
 
-<a name="ready"></a>
+<a name="async-ready"></a>
 <h3>async ready()</h3>
 Defer script execution until the DOM is ready. Implements the Promise interface.
 
@@ -41,7 +41,7 @@ ready().then(function() {
 });</pre>
 
 
-<a name="loaded"></a>
+<a name="async-loaded"></a>
 <h3>async loaded()</h3>
 Allows script execution to be deferred until after the initial page render. Implements the Promise interface.
 
@@ -64,7 +64,7 @@ let windowWidth = $cache().$window.width();</pre>
 
 
 
-<a name="isInIframe"></a>
+<a name="isiniframe"></a>
 <h3>isInIframe()</h3>
 Enables check in case our code is running inside an iframe. This can avoid the problem where a functions fails because it is unavailable inside the iframe. 
 
@@ -78,7 +78,7 @@ if (isInIframe) {
 
 
 
-<a name="getViewportOffset"></a>
+<a name="getviewportoffsetelement"></a>
 <h3>getViewportOffset(element)</h3>
 <p>Returns the top, right, bottom, left offsets of the element (relative to the viewport).</p> 
 <p>For example, a negative offset means that the element is scrolled out of view.</p>
@@ -94,7 +94,7 @@ if (targetOffsets.top < 0 || targetOffsets.bottom < 0) {
 }</pre>
 
 
-<a name="onTopZIndex"></a>
+<a name="ontopzindex"></a>
 <h3>onTopZIndex()</h3>
 <p>Returns the highest z-index value on the page.</p> 
 <p>This is useful for popup dialog boxes (or notifications) that need to display on-top of everything else already on the page.</p>   
@@ -105,7 +105,7 @@ $dialog.css({ 'position', 'absolute', 'z-index', onTopZIndex() + 1 });  // posit
 
 
 
-<a name="getZIndex"></a>
+<a name="getzindexelement-recursive"></a>
 <h3>getZIndex(element, recursive)</h3>
 <p>Gets the z-index style applied to an element.</p>
 <p>More usefully (because parent z-index affects descendants), set the recursive option true for the <strong>effective</strong> z-index (ie. the element's ancestry).</p>   
@@ -116,7 +116,7 @@ const dialogLayer = getZIndex(dialog, true);</pre>
 
 
 
-<a name="getAppliedStyle"></a>
+<a name="getappliedstyleelement-style"></a>
 <h3>getAppliedStyle(element, style)</h3>
 <p>Slightly easier to use than the native window.getComputedStyle() function.</p>
 
@@ -128,7 +128,7 @@ const buttonVisible = getAppliedStyle(button, 'display') !== 'none';</pre>
 
 
 
-<a name="webpSupport"></a>
+<a name="webpsupportfeature"></a>
 <h3>webpSupport(feature)</h3>
 <p>As of 2021 full browser support for webp images is ~95%. Nevertheless, with Safari only recently offering full
 support and considering many older IOS devices (which simply can't be upgraded), this function will probably be useful 
@@ -154,7 +154,7 @@ webpSupport('animation').then(msg => {
 
 
 
-<a name="screenResolution"></a>
+<a name="screenresolution"></a>
 <h3>screenResolution()</h3>
 <p>Part of a system to determine the optimal image resolution for a given device.</p>
 <p>Returns 'lo', 'med' or 'hi' based on the size of the browser viewport.</p>
@@ -169,7 +169,7 @@ wallpaper.src = \`/img/wallpaper-${resolution}.jpg\`;</pre>
 
 
 
-<a name="hash"></a>
+<a name="hashcontent"></a>
 <h3>hash(content)</h3>
 <p>A simple, fast (faster than md5 etc) hash code generator.</p>
 
