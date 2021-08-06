@@ -21,7 +21,7 @@
     <li><a href="#onTopZIndex"><code>onTopZIndex()</code></a> - for new elements to be displayed on top.</li>
     <li><a href="#getZIndex"><code>getZIndex(element)</code></a> - provides layer information.</li>
     <li><a href="#getAppliedStyle"><code>getAppliedStyle(element, style)</code></a> - computed style.</li></li>
-    <li><a href="webpsupport">webpSupport()</a> - whether the browser supports webP images.</li></li>
+    <li><a href="#webpsupport"><code>webpSupport()</code></a> - whether the browser supports webP images.</li></li>
     <li><a href="#screenResolution"><code>screenResolution()</code></a> - returns 'lo', 'med' or 'hi' (to support a responsive image system).</li>
     <li><a href="#hash"><code>hash(content)</code></a> - fast hash code generator.</li>    
 </ul>
