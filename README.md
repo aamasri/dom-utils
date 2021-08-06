@@ -21,7 +21,7 @@
     <li><a href="#onTopZIndex"><code>onTopZIndex()</code></a> - for new elements to be displayed on top.</li>
     <li><a href="#getZIndex"><code>getZIndex(element)</code></a> - provides layer information.</li>
     <li><a href="#getAppliedStyle"><code>getAppliedStyle(element, style)</code></a> - computed style.</li></li>
-    <li><code>webpSupport()</code> - whether the browser supports webP images.</li></li>
+    <li><a href="webpsupport">webpSupport()</a> - whether the browser supports webP images.</li></li>
     <li><a href="#screenResolution"><code>screenResolution()</code></a> - returns 'lo', 'med' or 'hi' (to support a responsive image system).</li>
     <li><a href="#hash"><code>hash(content)</code></a> - fast hash code generator.</li>    
 </ul>
@@ -123,6 +123,34 @@ const dialogLayer = getZIndex(dialog, true);</pre>
 <pre>import { getAppliedStyle } from '@aamasri/dom-utils';
 
 const buttonVisible = getAppliedStyle(button, 'display') !== 'none';</pre>
+
+
+
+
+
+<a name="webpSupport"></a>
+<h3>webpSupport(feature)</h3>
+<p>As of 2021 full browser support for webp images is ~95%. Nevertheless, with Safari only recently offering full
+support and considering many older IOS devices (which simply can't be upgraded), this function will probably be useful 
+through 2024.</p> 
+
+This function checks for specific feature support (alpha by default) because  some browsers added features incrementally
+with lossy image support added first, followed by lossless & alpha, and finally support for animated images.</p>
+
+<pre>
+import { webpSupport } from '@aamasri/dom-utils';
+
+// eg. check for full webp support including animation
+webpSupport('animation').then(msg => {
+    window.browserInfo.webpSupport = true;
+    console.log(msg);
+}).catch(errorMessage => {
+    window.browserInfo.webpSupport = false;
+    console.info(errorMessage);
+    stripWebp();    // remove unsupported responsive webp images from srcset
+});
+</pre>
+
 
 
 

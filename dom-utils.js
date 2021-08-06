@@ -228,18 +228,37 @@ export function getAppliedStyle(element, style) {
 
 
 
-
 /**
- * Whether the browser supports webp images.
+ * Check for webp feature support. Some browsers initially introduced partial support i.e. for lossy images
+ * (i.e. compression), then added lossless & alpha support, finally adding support for animation.
  *
- * @returns {boolean}
+ * Usage: webpSupport('animated').then(() => console.log(`webp supported`)).catch(errMsg => console.log(errMsg) )
+ *
+ * @param {('lossy'|'lossless'|'alpha'|'animation')} feature
+ * @return {Promise}
  */
-export async function webpSupport() {
-	if (!self.createImageBitmap) return false;
+export function webpSupport(feature='alpha') {
+	return new Promise((resolve, reject) => {
+		const testImages = {
+			lossy: "UklGRiIAAABXRUJQVlA4IBYAAAAwAQCdASoBAAEADsD+JaQAA3AAAAAA",
+			lossless: "UklGRhoAAABXRUJQVlA4TA0AAAAvAAAAEAcQERGIiP4HAA==",
+			alpha: "UklGRkoAAABXRUJQVlA4WAoAAAAQAAAAAAAAAAAAQUxQSAwAAAARBxAR/Q9ERP8DAABWUDggGAAAABQBAJ0BKgEAAQAAAP4AAA3AAP7mtQAAAA==",
+			animation: "UklGRlIAAABXRUJQVlA4WAoAAAASAAAAAAAAAAAAQU5JTQYAAAD/////AABBTk1GJgAAAAAAAAAAAAAAAAAAAGQAAABWUDhMDQAAAC8AAAAQBxAREYiI/gcA"
+		};
+		const img = new Image();
 
-	const webpData = 'data:image/webp;base64,UklGRh4AAABXRUJQVlA4TBEAAAAvAAAAAAfQ//73v/+BiOh/AAA=';
-	const blob = await fetch(webpData).then(r => r.blob());
-	return createImageBitmap(blob).then(() => true, () => false);
+		img.onload = () => {
+			if ((img.width > 0) && (img.height > 0))
+				resolve(`This browser supports webp images with ${feature}.`);
+			else
+				reject(`This browser does NOT fully support webp images with ${feature}.`);
+		};
+		img.onerror = () => {
+			reject(`This browser does NOT fully support webp images with ${feature}`);
+		};
+
+		img.src = "data:image/webp;base64," + testImages[feature];
+	});
 }
 
 
