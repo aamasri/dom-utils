@@ -201,12 +201,12 @@ export function onTopZIndex() {
  * The recursive option will traverse the parent tree (z-index includes descendents)
  *
  * @param {Element | Node | ParentNode} element
- * @param {boolean | undefined} [recursive=undefined] - whether to traverse parents in search of z-index
+ * @param {boolean} [recursive=false] - whether to traverse parents in search of z-index
  * @returns {number} - the z-index
  */
-export function getZIndex(element, recursive) {
-	const zIndex = parseInt(getAppliedStyle(element, 'z-Index')) || 0;
-
+export function getZIndex(element, recursive=false) {
+	let zIndex = getAppliedStyle(element, 'z-Index') || 0;	// z-index can be "auto"
+	zIndex = (isNaN(zIndex) || zIndex == 2147483647) ? 0 : parseInt(zIndex);	// solve an earlier bug which caused zIndex to be 2147483647
 	return (recursive && zIndex === 0) ? getZIndex(element.parentNode, true) : zIndex;
 }
 

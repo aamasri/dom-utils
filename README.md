@@ -207,7 +207,7 @@ Then import and use it in your project's ES6 modules:
 <pre>
 import { ready, loaded, isVisible } from '@aamasri/dom-utils';
 
-ready().then(function() { 
+ready().then(function() {
     alert('Your browser is ready to run scripts...')
 });
 </pre>
