@@ -124,6 +124,9 @@ export function isMobile() {
  * @returns {boolean}
  */
 export function isVisible(el) {
+    if (!el instanceof Object)
+        return false;
+
 	if (el instanceof jQuery)
 		el = el[0];
 
@@ -131,13 +134,19 @@ export function isVisible(el) {
 	if (getAppliedStyle(el, 'display') === 'none' || getAppliedStyle(el, 'visibility') === 'hidden' || parseFloat(getAppliedStyle(el, 'opacity')) < 0.1)
 		return false;
 
-	const rect = el.getBoundingClientRect();
-	return (
-		rect.top >= 0 &&
-		rect.left >= 0 &&
-		rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-		rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-	);
+    try {
+		const rect = el.getBoundingClientRect();
+		return (
+			rect.top >= 0 &&
+			rect.left >= 0 &&
+			rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+			rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+		);
+
+	} catch (error) {
+        console.warn('dom-utils.isVisible(el) threw error', error);
+        return false;
+    }
 }
 
 
@@ -221,8 +230,19 @@ export function getZIndex(element, recursive=false) {
  * @param {string} style - eg. 'z-index' or 'margin'
  * @returns {string} - the style value
  */
-export function getAppliedStyle(element, style) {
-	return window.getComputedStyle(element).getPropertyValue(style);
+export function getAppliedStyle(el, style) {
+    if (el instanceof jQuery)
+        el = el[0];
+
+    if (!el instanceof Object)
+        return '';
+
+    try {
+        return window.getComputedStyle(el).getPropertyValue(style);
+    } catch (error) {
+        console.warn('dom-utils.getAppliedStyle(el, style) threw error', error);
+        return '';
+    }
 }
 
 
