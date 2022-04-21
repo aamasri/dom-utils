@@ -1,7 +1,7 @@
 {
   "name": "@aamasri/dom-utils",
-  "version": "1.1.5",
-  "versionDescription": "Improved error handling when handling non HTML elements.",
+  "version": "1.1.6",
+  "versionDescription": "Catch fatal errors thrown in some cases by element.getClientRects() in Firefox",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "publish": "node ./publish.js"

@@ -165,15 +165,18 @@ export function getViewportOffset($element) {
 		return undefined;
 	}
 
-	const offset = $element.offset();
-	const scroll = {};
+	let offset;
+	try {
+		offset = $element.offset();
+	} catch (error) {
+		console.error('function getViewportOffset(element) could not determine the element offset!');
+		return undefined;
+	}
+
 	const $win = $cache().$window;
 
-	scroll.left = $win.scrollLeft();
-	scroll.top = $win.scrollTop();
-
-	const left = offset.left - scroll.left;
-	const top = offset.top - scroll.top;
+	const left = offset.left - $win.scrollLeft();
+	const top = offset.top - $win.scrollTop();
 	const right = $win.outerWidth() - left - $element.outerWidth();
 	const bottom = $win.height() - top - $element.outerHeight();
 
