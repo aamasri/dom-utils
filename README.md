@@ -94,6 +94,23 @@ if (targetOffsets.top < 0 || targetOffsets.bottom < 0) {
 }</pre>
 
 
+<a name="getdocumentoffsetelement"></a>
+<h3>getDocumentOffset(element)</h3>
+<p>Returns the top, right, bottom, left offsets of the element (relative to the document).</p> 
+<p>For example, a negative offset means that the element is scrolled out of view.</p>
+<p>This function is also useful in positioning another element relative to the specified element.</p>   
+
+<pre>import { getViewportOffset } from '@aamasri/dom-utils';
+
+const target = window.getElementById('submitButton');
+const targetOffsets = getViewportOffset(target);    // target can be a DOM element or jQuery object
+
+if (targetOffsets.top < 0 || targetOffsets.bottom < 0) {
+    target.scrollIntoView();
+}</pre>
+
+
+
 <a name="ontopzindex"></a>
 <h3>onTopZIndex()</h3>
 <p>Returns the highest z-index value on the page.</p> 

@@ -152,16 +152,23 @@ export function isVisible(el) {
 
 
 
+/**
+ * @typedef {Object} Offsets - The top/right/bottom/left element offsets.
+ * @property {number} top
+ * @property {number} right
+ * @property {number} bottom
+ * @property {number} left
+ */
 
 /** Returns the specified element's offset from the visible viewport.
  *
  * @param {Element | Node | ParentNode | jQuery} $element
- * @returns {Object | undefined}
+ * @returns {Offsets | undefined}
  */
 export function getViewportOffset($element) {
-	$element = jQuery($element);	// convert to all element types to jQuery
+	$element = jQuery($element);	// convert all element types to jQuery
 	if (!$element.length) {
-		console.error('function getViewportOffset(element) expects a DOM element or jQuery object!');
+		console.error('function getViewportOffset(element) expects a DOM element, jQuery object, or CSS selector!');
 		return undefined;
 	}
 
@@ -173,15 +180,51 @@ export function getViewportOffset($element) {
 		return undefined;
 	}
 
-	const $win = $cache().$window;
+	const $win = jQuery(window);
 
 	const left = offset.left - $win.scrollLeft();
 	const top = offset.top - $win.scrollTop();
-	const right = $win.outerWidth() - left - $element.outerWidth();
+	const right = $win.width() - left - $element.outerWidth();
 	const bottom = $win.height() - top - $element.outerHeight();
 
 	return { top, right, bottom, left };
 }
+
+
+
+/** Returns the specified element's offset from the entire document.
+ *
+ * @param {Element | Node | ParentNode | jQuery} $element
+ * @returns {Offsets | undefined}
+ */
+export function getDocumentOffset($element) {
+	$element = jQuery($element);	// convert all element types to jQuery
+	if (!$element.length) {
+		console.error('function getDocumentOffset(element) expects a DOM element, jQuery object, or CSS selector!');
+		return undefined;
+	}
+
+	let offset;
+	try {
+		offset = $element.offset();
+	} catch (error) {
+		console.error('function getViewportOffset(element) could not determine the element offset!');
+		return undefined;
+	}
+
+	const $win = jQuery(window);
+
+	const left = offset.left;
+	const top = offset.top;
+	const right = $win.width() + $win.scrollLeft() - left - $element.outerWidth();
+	// jQuery(window).width() + jQuery(window).scrollLeft() - jQuery('#popup4').offset().left - jQuery('#popup4').outerWidth();
+	const bottom = $win.height() + $win.scrollTop() - top - $element.outerHeight();
+
+	return { top, right, bottom, left };
+}
+
+
+
 
 
 
