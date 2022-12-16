@@ -1,7 +1,7 @@
 {
   "name": "@aamasri/dom-utils",
-  "version": "1.1.7",
-  "versionDescription": "Added fn getDocumentOffset()",
+  "version": "1.1.8",
+  "versionDescription": "Fixed typos and a jsDoc issue",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "publish": "node ./publish.js"

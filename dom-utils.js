@@ -87,7 +87,7 @@ export function isTouchDevice() {
 		return cachedIsTouchDevice;
 	}
 
-	// include the 'heartz' as a way to have a non matching MQ to help terminate the join
+	// include the 'heartz' as a way to have a non-matching MQ to help terminate the join
 	// https://git.io/vznFH
 	const mq = function (query) {
 		cachedIsTouchDevice = window.matchMedia(query).matches;
@@ -118,7 +118,7 @@ export function isMobile() {
 
 
 /**
- * Whether the specified element is visible (ie. css display/visibility/opacity and viewport scroll position).
+ * Whether the specified element is visible (i.e. css display/visibility/opacity and viewport scroll position).
  *
  * @param {Element | Node | ParentNode | jQuery} el
  * @returns {boolean}
@@ -252,7 +252,7 @@ export function onTopZIndex() {
 
 
 /**
- * Get the z-index of the the specified element.
+ * Get the z-index of the specified element.
  * The recursive option will traverse the parent tree (z-index includes descendents)
  *
  * @param {Element | Node | ParentNode} element
@@ -270,10 +270,10 @@ export function getZIndex(element, recursive=false) {
 
 
 /**
- * Get the computed style of the the specified element and style.
+ * Get the computed style of the specified element and style.
  *
- * @param {Element | Node | ParentNode} element
- * @param {string} style - eg. 'z-index' or 'margin'
+ * @param {Element | Node | ParentNode} el
+ * @param {string} style - e.g. 'z-index' or 'margin'
  * @returns {string} - the style value
  */
 export function getAppliedStyle(el, style) {
@@ -356,7 +356,7 @@ export function screenResolution() {
 
 
 /**
- * A simple, fast (faster than md5 etc) hash code generator.
+ * A simple, fast (faster than md5 etc.) hash code generator.
  *
  * @param {string} content  - string to hash
  * @returns {string}		- the unique hash code
