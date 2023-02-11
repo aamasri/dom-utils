@@ -257,7 +257,7 @@ Some of the utility functions depend on the jQuery package.
 ## Manual release steps
 <ol>
 <li>Increment the "version" attribute of `package.json`.</li>
-<li>Increment the version number in the `dom-utils.js` file.</li>
+<li>Increment the version number in the `dom-utils.mjs` file.</li>
 <li>Commit <pre>git commit -a -m "Release version x.x.x - description"</pre></li>
 <li>Tag the commit with it's version number <pre>git tag x.x.x</pre></li>
 <li>Change the "latest" tag pointer to the latest commit & push:
