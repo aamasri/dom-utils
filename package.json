@@ -1,16 +1,15 @@
 {
   "name": "@aamasri/dom-utils",
-  "version": "1.1.9",
-  "versionDescription": "Require jQuery 3.6 to overcome NPM vulnerability warnings",
+  "version": "1.1.10",
+  "versionDescription": "Explicitly set ES module type: dom-utils.mjs (for Vite).",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "publish": "node ./publish.js"
   },
   "dependencies": {
     "jquery": ">=3.6.2"
   },
   "description": "A collection of DOM utils to add syntactic sugar and supplement jQuery.",
-  "main": "dom-utils.js",
+  "main": "dom-utils.mjs",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/aamasri/dom-utils.git"
