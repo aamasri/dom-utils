@@ -252,8 +252,8 @@ export function onTopZIndex() {
 	const elements = document.getElementsByTagName('*');
 
 	for (let i = 0; i < elements.length; i++) {
-		let zIndex = getZIndex(elements[i]);
-
+		let zIndex = window.getComputedStyle(elements[i]).getPropertyValue('z-index');
+		zIndex = isNaN(zIndex) ? 0 : parseInt(zIndex);
 		if (zIndex && zIndex > zTop)
 			zTop = zIndex;
 	}
@@ -300,7 +300,7 @@ export function getAppliedStyle(el, style) {
     try {
         return window.getComputedStyle(el).getPropertyValue(style);
     } catch (error) {
-        console.warn('dom-utils.getAppliedStyle(el, style) threw error', error);
+        console.warn(`dom-utils.getAppliedStyle(el, ${style}) threw error on element:`, el, error);
         return '';
     }
 }

@@ -1,7 +1,7 @@
 {
   "name": "@aamasri/dom-utils",
-  "version": "1.2.0",
-  "versionDescription": "Reduced jQuery dependency and added isInView(el).",
+  "version": "1.2.1",
+  "versionDescription": "Fixed and made onTopZIndex more efficient. Update dependencies (jQuery)",
   "scripts": {
     "publish": "node ./publish.js"
   },
