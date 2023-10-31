@@ -1,7 +1,7 @@
 {
   "name": "@aamasri/dom-utils",
-  "version": "1.1.11",
-  "versionDescription": "Changed main module extension: dom-utils.mjs (for Vite).",
+  "version": "1.2.0",
+  "versionDescription": "Reduced jQuery dependency and added isInView(el).",
   "scripts": {
     "publish": "node ./publish.js"
   },
@@ -20,7 +20,7 @@
     "ES6",
     "ES7"
   ],
-  "author": "Ananda Masri <ananda@auroraweb.ca> (https://auroraweb.ca)",
+  "author": "Ananda Masri <ananda@auro.technology>",
   "license": "MIT",
   "publishConfig": {
     "access": "public"

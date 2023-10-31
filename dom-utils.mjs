@@ -127,7 +127,7 @@ export function isVisible(el) {
     if (!el instanceof Object)
         return false;
 
-	if (el instanceof jQuery)
+	if (typeof jQuery !== 'undefined' && el instanceof jQuery)
 		el = el[0];
 
 	//is object hidden
@@ -149,6 +149,20 @@ export function isVisible(el) {
     }
 }
 
+
+
+// modern more accurate alternative to isVisible(el) but async
+async function isInView(el) {
+	return new Promise((resolve) => {
+		const observer = new IntersectionObserver(
+			(entries, observerItself) => {
+				observerItself.disconnect();
+				resolve(entries[0].intersectionRatio === 1);
+			}
+		);
+		observer.observe(el);
+	});
+}
 
 
 
@@ -277,7 +291,7 @@ export function getZIndex(element, recursive=false) {
  * @returns {string} - the style value
  */
 export function getAppliedStyle(el, style) {
-    if (el instanceof jQuery)
+	(typeof jQuery !== 'undefined' && el instanceof jQuery)
         el = el[0];
 
     if (!el instanceof Object)
