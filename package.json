@@ -1,7 +1,7 @@
 {
   "name": "@aamasri/dom-utils",
-  "version": "1.2.1",
-  "versionDescription": "Fixed and made onTopZIndex more efficient. Update dependencies (jQuery)",
+  "version": "1.2.2",
+  "versionDescription": "Fixed error in fn getAppliedStyle()",
   "scripts": {
     "publish": "node ./publish.js"
   },

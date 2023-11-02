@@ -291,7 +291,7 @@ export function getZIndex(element, recursive=false) {
  * @returns {string} - the style value
  */
 export function getAppliedStyle(el, style) {
-	(typeof jQuery !== 'undefined' && el instanceof jQuery)
+	if (typeof jQuery !== 'undefined' && el instanceof jQuery)
         el = el[0];
 
     if (!el instanceof Object)
