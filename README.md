@@ -23,7 +23,8 @@
     <li><a href="#getappliedstyleelement-style"><code>getAppliedStyle(element, style)</code></a> - computed style.</li></li>
     <li><a href="#webpsupportfeature"><code>webpSupport()</code></a> - whether the browser supports webP images.</li></li>
     <li><a href="#screenresolution"><code>screenResolution()</code></a> - returns 'lo', 'med' or 'hi' (to support a responsive image system).</li>
-    <li><a href="#hashcontent"><code>hash(content)</code></a> - fast hash code generator.</li>    
+    <li><a href="#hashcontent"><code>hash(content)</code></a> - fast hash code generator.</li>
+    <li><a href="#hashcontent"><code>scrollTo(elementOrSelector)</code></a> - an easier, more flexible alternative to element.scrollIntoView().</li>
 </ul>
 
 
@@ -179,7 +180,6 @@ webpSupport('animation').then(msg => {
 <pre>import { screenResolution } from '@aamasri/dom-utils';
 
 const resolution = screenResolution();
-
 wallpaper.src = \`/img/wallpaper-${resolution}.jpg\`;</pre>
 
 
@@ -201,12 +201,21 @@ $input.on('change', function() {
 
     if (newContentSignature !== initialContentSignature)
         alert('the input value changed');
-});
+});</pre>
 
 
 
 
-wallpaper.src = \`/img/wallpaper-${resolution}.jpg\`;</pre>
+<a name="scrollTo"></a>
+<h3>scrollTo(elementOrSelector)</h3>
+<p> An alternative to element.scrollIntoView()<br>
+ 1. It handles selectors and Elements<br>
+ 2. It's svelte friendly, handling components that are still rendering</p>
+
+<pre>import { scrollTo } from '@aamasri/dom-utils';
+
+scrollTo('.user-profile-{userId}}');
+</pre>
 
 
 

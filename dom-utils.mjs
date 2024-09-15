@@ -1,7 +1,5 @@
 /**
  * @fileOverview A collection of DOM utils to add syntactic sugar and supplement jQuery.
- * @author Ananda Masri
- * @version 1.0.4
  */
 
 
@@ -388,4 +386,34 @@ export function hash(content) {
 	}
 
 	return hash;
+}
+
+
+
+/** An alternative to element.scrollIntoView()
+ 1. It handles selectors and Elements
+ 2. It's svelte friendly, handling components that are still rendering
+
+ * @param {(Element|string)} elementOrSelector - element or CSS selector
+ * @returns {void}
+ */
+export function scrollTo(elementOrSelector) {
+	let element;
+	if (elementOrSelector instanceof Element)
+		element = elementOrSelector;
+	else if (typeof elementOrSelector === 'string') {
+		console.log('scroll to string', elementOrSelector);
+		element = document.querySelector(elementOrSelector);
+		if (!element) {
+			window.setTimeout(() => {
+				let element = document.querySelector(elementOrSelector);   // try again in case element creation is delayed
+				if (element)
+					element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+			}, 1500);
+			return;
+		}
+	}
+
+	if (element instanceof Element)
+		element.scrollIntoView({ behavior: 'smooth', block: 'center' });
 }

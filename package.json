@@ -1,7 +1,7 @@
 {
   "name": "@aamasri/dom-utils",
-  "version": "1.2.2",
-  "versionDescription": "Fixed error in fn getAppliedStyle()",
+  "version": "1.2.3",
+  "versionDescription": "scrollTo(elementOrSelector)",
   "scripts": {
     "publish": "node ./publish.js"
   },
