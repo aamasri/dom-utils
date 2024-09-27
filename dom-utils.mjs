@@ -415,5 +415,5 @@ export function scrollTo(elementOrSelector) {
 	}
 
 	if (element instanceof Element)
-		element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+		element.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }

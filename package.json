@@ -1,7 +1,7 @@
 {
   "name": "@aamasri/dom-utils",
-  "version": "1.2.3",
-  "versionDescription": "scrollTo(elementOrSelector)",
+  "version": "1.2.4",
+  "versionDescription": "Made scrollTo(elementOrSelector) scroll top (rather than center of element into view.",
   "scripts": {
     "publish": "node ./publish.js"
   },
