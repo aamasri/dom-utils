@@ -408,7 +408,7 @@ export function scrollTo(elementOrSelector) {
 			window.setTimeout(() => {
 				let element = document.querySelector(elementOrSelector);   // try again in case element creation is delayed
 				if (element)
-					element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+					element.scrollIntoView({ behavior: 'smooth', block: 'start' });
 			}, 1500);
 			return;
 		}
