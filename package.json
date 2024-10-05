@@ -1,7 +1,7 @@
 {
   "name": "@aamasri/dom-utils",
-  "version": "1.2.5",
-  "versionDescription": "Fixed scrollTo(elementOrSelector) scrolls to center of element in some cases.",
+  "version": "1.2.6",
+  "versionDescription": "Fixed recursive fn getZIndex so it stops at the root element.",
   "scripts": {
     "publish": "node ./publish.js"
   },

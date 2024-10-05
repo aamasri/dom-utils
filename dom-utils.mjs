@@ -273,10 +273,9 @@ export function onTopZIndex() {
  */
 export function getZIndex(element, recursive=false) {
 	let zIndex = getAppliedStyle(element, 'z-Index') || 0;	// z-index can be "auto"
-	zIndex = (isNaN(zIndex) || zIndex == 2147483647) ? 0 : parseInt(zIndex);	// solve an earlier bug which caused zIndex to be 2147483647
-	return (recursive && zIndex === 0) ? getZIndex(element.parentNode, true) : zIndex;
+	zIndex = (isNaN(zIndex) || zIndex === 2147483647) ? 0 : parseInt(zIndex);	// solve an earlier bug which caused zIndex to be 2147483647
+	return (recursive && zIndex === 0 && element !== document.documentElement) ? getZIndex(element.parentNode, true) : zIndex;
 }
-
 
 
 
